@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
+<title>Port d'Oran — ABDERRAHMANE MOHAMED (Mobile Edition)</title>
+<style>
+:root {
+  --bg-dark: #07080a;
+  --bg-phone: #0e1117;
+  --bg-card: #151922;
+  --bg-card-hover: #1c222e;
+  --bg-input: #1b202c;
+  --bg-input-hover: #242b3b;
+  --border-muted: #283042;
+  --border-green: #3d6100;
+  --border-green-bright: #76b900;
+  --green-primary: #76b900;
+  --green-hover: #609800;
+  --green-bright: #8be300;
+  --green-subtle: rgba(118, 185, 0, 0.12);
+  --green-glow: rgba(118, 185, 0, 0.35);
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --text-dim: #6b7280;
+  --white: #ffffff;
+  --radius-xl: 20px;
+  --radius-lg: 14px;
+  --radius-md: 10px;
+  --radius-sm: 6px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(118, 185, 0, 0.1) 0%, transparent 70%),
+    linear-gradient(to bottom, #000000, var(--bg-dark));
+}
+
+.phone-wrapper {
+  width: 100%;
+  max-width: 440px;
+  min-height: 100vh;
+  background: var(--bg-phone);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 0 50px rgba(0,0,0,0.9), 0 0 20px var(--green-subtle);
+  overflow-x: hidden;
+}
+
+@media (min-width: 480px) {
+  body {
+    padding: 20px 0;
+  }
+  .phone-wrapper {
+    min-height: 860px;
+    height: 90vh;
+    max-height: 920px;
+    border-radius: 36px;
+    border: 3px solid #232a38;
+    outline: 1px solid rgba(118, 185, 0, 0.3);
+  }
+}
+
+.app-header {
+  background: linear-gradient(180deg, #181d28 0%, #10131b 100%);
+  padding: 18px 16px 14px 16px;
+  border-bottom: 1px solid var(--border-green);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+}
+
+.header-title-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-badge {
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  color: var(--green-bright);
+  text-transform: uppercase;
+}
+
+.app-header h1 {
+  font-size: 17px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  color: var(--white);
+  text-shadow: 0 0 10px rgba(118, 185, 0, 0.4);
+}
+
+.settings-btn {
+  background: var(--bg-input);
+  border: 1px solid var(--border-green);
+  color: var(--green-bright);
+  font-size: 18px;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.settings-btn:active {
+  transform: scale(0.92);
+  background: var(--green-primary);
+  color: var(--bg-dark);
+}
+
+.content-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  border: 1px solid var(--border-muted);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+.top-date {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--bg-input);
+  padding: 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-green);
+}
+
+.date-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.date-label {
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--green-bright);
+  text-transform: uppercase;
+}
+
+.mini-codifie {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-green);
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 800;
+  transition: all 0.2s;
+  color: var(--text-muted);
+}
+
+.mini-codifie input {
+  display: none;
+}
+
+.mini-codifie:has(input:checked) {
+  background: var(--green-primary);
+  color: var(--bg-dark);
+  border-color: var(--green-bright);
+  box-shadow: 0 0 10px var(--green-glow);
+}
+
+.top-date input[type=date] {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--green-primary);
+  font-size: 16px;
+  text-align: center;
+  color: var(--white);
+  background: var(--bg-card);
+  font-weight: 800;
+  outline: none;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.input-icon-wrap, .check-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  border: 1px solid var(--border-muted);
+  border-radius: var(--radius-md);
+  background: var(--bg-input);
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  height: 40px;
+  transition: all 0.2s;
+}
+
+.check-wrap input[type=checkbox] {
+  accent-color: var(--green-primary);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.check-wrap:has(input:checked) {
+  background: var(--green-subtle);
+  border-color: var(--green-primary);
+  color: var(--white);
+}
+
+.check-wrap.orange-opt:has(input:checked),
+.check-wrap.green-opt:has(input:checked),
+.check-wrap.frigo-opt:has(input:checked),
+.check-wrap.depot-opt:has(input:checked) {
+  background: var(--green-primary);
+  color: var(--bg-dark) !important;
+  border-color: var(--green-bright);
+}
+
+.input-icon-wrap input[type=number] {
+  border: 1px solid var(--border-muted);
+  background: var(--bg-card);
+  width: 44px;
+  height: 26px;
+  border-radius: var(--radius-sm);
+  text-align: center;
+  font-weight: 800;
+  color: var(--green-bright);
+  font-size: 13px;
+  outline: none;
+}
+
+.row {
+  background: var(--bg-input);
+  padding: 12px;
+  border: 1px solid var(--border-muted);
+  border-left: 4px solid var(--green-primary);
+  border-radius: var(--radius-md);
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.size-selector {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tpbar {
+  display: flex;
+  gap: 4px;
+}
+
+.tpopt {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border: 1px solid var(--border-muted);
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  font-weight: 800;
+  font-size: 11px;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.tpopt:has(input:checked) {
+  background: var(--green-primary);
+  color: var(--bg-dark);
+  border-color: var(--green-bright);
+}
+
+.tpopt input[type=radio] {
+  display: none;
+}
+
+.row .remove {
+  background: var(--bg-card);
+  color: var(--green-bright);
+  border: 1px solid var(--border-green);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-weight: 900;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-fields {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 1fr;
+  gap: 6px;
+}
+
+.row input {
+  padding: 8px 4px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-muted);
+  font-size: 14px;
+  width: 100%;
+  background: var(--bg-card);
+  color: var(--white);
+  font-weight: 800;
+  text-align: center;
+  outline: none;
+}
+
+.row .nbj {
+  background: #0d1117;
+  color: var(--green-bright);
+  border: 1px solid var(--border-green);
+}
+
+.actions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.btn {
+  background: var(--bg-input);
+  color: var(--white);
+  border: 1px solid var(--border-muted);
+  padding: 12px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.15s;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn.ghost {
+  background: transparent;
+  color: var(--text-muted);
+}
+
+#addBtn {
+  border-color: var(--border-green);
+  color: var(--green-bright);
+  grid-column: span 2;
+  background: var(--green-subtle);
+}
+
+#calcBtn {
+  background: linear-gradient(135deg, #76b900 0%, #4d7a00 100%);
+  color: #050702;
+  font-weight: 900;
+  font-size: 15px;
+  border: none;
+  box-shadow: 0 4px 12px var(--green-glow);
+  grid-column: span 2;
+  padding: 14px;
+}
+
+#resetBtn {
+  grid-column: span 2;
+  background: #171c26;
+  color: var(--text-muted);
+}
+
+.table-wrap {
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-green);
+  background: var(--bg-card);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+thead th {
+  background: #161b24;
+  color: var(--green-bright);
+  font-weight: 800;
+  padding: 10px 6px;
+  text-align: center;
+  border-bottom: 2px solid var(--border-green);
+  border-right: 1px solid var(--border-muted);
+}
+
+tbody td {
+  padding: 8px 6px;
+  border-bottom: 1px solid var(--border-muted);
+  border-right: 1px solid var(--border-muted);
+  color: var(--text-main);
+  font-weight: 700;
+  text-align: center;
+}
+
+tbody tr:nth-child(even) td {
+  background: #11151e;
+}
+
+tbody td:first-child {
+  color: var(--white);
+  font-weight: 900;
+}
+
+tfoot td {
+  background: #161b24;
+  font-weight: 800;
+  padding: 10px;
+  text-align: right;
+  border-top: 2px solid var(--border-green);
+  color: var(--white);
+}
+
+.ttc-box {
+  background: linear-gradient(135deg, #181d27 0%, #0c0e14 100%);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid var(--border-green-bright);
+  box-shadow: 0 8px 20px var(--green-subtle);
+  text-align: center;
+}
+
+.ttc-title {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--green-bright);
+  font-weight: 900;
+}
+
+.ttc-value {
+  font-weight: 900;
+  font-size: 32px;
+  color: var(--white);
+  text-shadow: 0 0 15px var(--green-glow);
+  margin-top: 4px;
+}
+
+#printBtn {
+  display: none;
+  background: linear-gradient(135deg, #76b900 0%, #4d7a00 100%);
+  color: #050702;
+  font-weight: 900;
+  width: 100%;
+  padding: 14px;
+  font-size: 15px;
+  border: none;
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 15px var(--green-glow);
+}
+
+.settings-modal-overlay {
+  display: none;
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(6px);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+}
+
+.settings-modal {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-height: 85%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-green-bright);
+  overflow: hidden;
+}
+
+.settings-header {
+  background: #181c26;
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-green);
+}
+
+.settings-header h2 {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--green-bright);
+}
+
+.close-modal-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.tariffs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  padding: 12px;
+  overflow-y: auto;
+}
+
+.tariff-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: var(--bg-input);
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-muted);
+}
+
+.tariff-item label {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--green-bright);
+  text-align: center;
+}
+
+.tariff-item input {
+  padding: 6px;
+  border-radius: 4px;
+  border: 1px solid var(--border-muted);
+  font-weight: 800;
+  font-size: 13px;
+  text-align: center;
+  color: var(--white);
+  background: var(--bg-card);
+  outline: none;
+}
+
+.settings-actions {
+  padding: 12px;
+  background: var(--bg-card);
+  display: flex;
+  gap: 8px;
+  border-top: 1px solid var(--border-muted);
+}
+
+#alertBox {
+  display: none;
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--green-primary);
+  color: var(--bg-dark);
+  padding: 10px 18px;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 900;
+  z-index: 3000;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+  width: 85%;
+  text-align: center;
+}
+
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  .phone-wrapper {
+    max-width: 100% !important;
+    min-height: auto !important;
+    height: auto !important;
+    box-shadow: none !important;
+    border: none !important;
+    background: white !important;
+  }
+  .app-header, .settings-btn, .options-grid, .top-date input, .actions-grid, .row, #alertBox, .settings-modal-overlay {
+    display: none !important;
+  }
+  .card, .table-wrap, table, th, td {
+    background: white !important;
+    color: black !important;
+    border: 1px solid black !important;
+    box-shadow: none !important;
+  }
+  .ttc-box {
+    display: flex !important;
+    background: white !important;
+    color: black !important;
+    border: 2px solid black !important;
+    box-shadow: none !important;
+  }
+  .ttc-value { color: black !important; text-shadow: none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="phone-wrapper">
+  <div id="alertBox"></div>
+
+  <header class="app-header">
+    <div class="header-title-box">
+      <span class="header-badge">PORT D'ORAN</span>
+      <h1>ABDERRAHMANE MOHAMED</h1>
+    </div>
+    <button id="openSettingsBtn" class="settings-btn" title="Paramètres">⚙️</button>
+  </header>
+
+  <div id="settingsModal" class="settings-modal-overlay">
+    <div class="settings-modal">
+      <div class="settings-header">
+        <h2>⚙️ TARIFS DZD</h2>
+        <button id="closeSettingsBtn" class="close-modal-btn">✖</button>
+      </div>
+      <div id="tariffsGrid" class="tariffs-grid"></div>
+      <div class="settings-actions">
+        <button id="resetTariffsBtn" class="btn ghost" style="flex:1" type="button">🔄 Réinit.</button>
+        <button id="saveTariffsBtn" class="btn" style="flex:1; background:var(--green-primary); color:var(--bg-dark);" type="button">💾 Sauvegarder</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-scroll">
+    <div class="card">
+      <div class="top-date">
+        <div class="date-header-row">
+          <span class="date-label">DATE D'ENTRÉE</span>
+          <label class="mini-codifie">
+            <input type="checkbox" id="codifieToggle">
+            <span>💻 Codifié</span>
+          </label>
+        </div>
+        <input type="date" id="commonEntry">
+      </div>
+
+      <div class="options-grid">
+        <label class="input-icon-wrap" for="sc1Count">
+          <span>SCANNER</span>
+          <input type="number" id="sc1Count" min="0" placeholder="-">
+        </label>
+        
+        <label class="check-wrap depot-opt">
+          <span>📦 DEPOT</span>
+          <input type="checkbox" id="depotToggle">
+        </label>
+
+        <label class="input-icon-wrap" for="anInput">
+          <span>ANNULÉE</span>
+          <input type="number" id="anInput" min="0" placeholder="-">
+        </label>
+
+        <label class="check-wrap frigo-opt">
+          <span>🐟 FRIGO</span>
+          <input type="checkbox" id="frToggle">
+        </label>
+
+        <label class="check-wrap orange-opt">
+          <span>C.ORANGE</span>
+          <input type="checkbox" id="cOrange">
+        </label>
+
+        <label class="check-wrap green-opt">
+          <span>C.VERT</span>
+          <input type="checkbox" id="cVert">
+        </label>
+      </div>
+    </div>
+
+    <div class="card">
+      <div id="rows"></div>
+
+      <div class="actions-grid">
+        <button id="addBtn" class="btn" type="button">+ Ajouter Conteneur</button>
+        <button id="sampleBtn" class="btn ghost" type="button">Exemple</button>
+        <button id="calcBtn" class="btn" type="button">⚡ CALCULER</button>
+        <button id="resetBtn" class="btn" type="button">🔄 Réinitialiser</button>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table id="resultTable" style="display:none;">
+        <thead>
+          <tr>
+            <th style="width:25%;">Code</th>
+            <th id="colHead1" style="width:25%;">Conteneurs</th>
+            <th id="colHead2" style="width:25%;">Jours</th>
+            <th style="width:25%;">DATE</th>
+          </tr>
+        </thead>
+        <tbody id="resultBody"></tbody>
+        <tfoot id="resultFoot" style="display:none;">
+          <tr><td colspan="3">Total HT (DZD)</td><td id="totalDzd">0,00</td></tr>
+          <tr><td colspan="3">TVA 19 %</td><td id="vatDzd">0,00</td></tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <div id="ttcBox" class="ttc-box">
+      <span class="ttc-title">TOTAL TTC</span>
+      <div id="ttcValue" class="ttc-value">0,00</div>
+    </div>
+
+    <button id="printBtn" class="btn" type="button">🖨️ IMPRIMER LA FACTURE</button>
+  </div>
+</div>
+
+<script>
+const DEFAULT_TARIFFS = {
+  TP04:135.85, TP13:102.95, TP14:205.9, TP15:360.33, TP16:411.8,
+  TP03:92.95,  TP09:74.35,  TP10:148.7, TP11:260.23, TP12:297.4,
+  GZ01:400,    GZ02:950,    GZ03:1300,  GZ04:2400,
+  PRD1:500,    PRD2:800,    PRD3:1200,  PRD4:2000,
+  EL02:5000,   EL03:8000,   EL04:10000, EL05:12000,
+  MA01:20000,  MA02:25000,  MA03:25000,
+  EV01:12000,  EV02:15000,  EV03:17000,
+  SC03:12000,  SC04:15000,  SC05:17000,
+  NE01:1000,   D088:300,    SC1:4000,   AN01:1000,  AC1:2000
+};
+
+let TARIFFS = JSON.parse(localStorage.getItem('port_oran_tariffs')) || {...DEFAULT_TARIFFS};
+
+function showAlert(msg) {
+  const box = document.getElementById("alertBox");
+  box.textContent = msg;
+  box.style.display = "block";
+  setTimeout(() => { box.style.display = "none"; }, 3000);
+}
+
+function triggerHaptic() {
+  if (navigator.vibrate) navigator.vibrate(20);
+}
+
+function getTariff(c) { return Number(TARIFFS[c]) || 0; }
+function round2(n) { return Math.round(n * 100) / 100; }
+function formatDzd(n) { return n.toLocaleString('fr-FR', {minimumFractionDigits: 2, maximumFractionDigits: 2}); }
+
+function parseDateParts(s) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s);
+  return m ? {y: +m[1], m: +m[2], d: +m[3]} : null;
+}
+
+function diffDaysInclusive(s, e) {
+  const a = parseDateParts(s), b = parseDateParts(e);
+  if (!a || !b) return 0;
+  const d1 = Date.UTC(a.y, a.m-1, a.d);
+  const d2 = Date.UTC(b.y, b.m-1, b.d);
+  return Math.floor((d2 - d1) / 86400000) + 1;
+}
+
+function formatDateFull(dateObj) {
+  if (!dateObj) return "";
+  const d = dateObj.getUTCDate();
+  const m = dateObj.getUTCMonth() + 1;
+  const y = dateObj.getUTCFullYear();
+  return `${d.toString().padStart(2, '0')}/${m.toString().padStart(2, '0')}/${y}`;
+}
+
+const rowsDiv = document.getElementById("rows"),
+      addBtn = document.getElementById("addBtn"),
+      calcBtn = document.getElementById("calcBtn"),
+      resetBtn = document.getElementById("resetBtn"),
+      sampleBtn = document.getElementById("sampleBtn"),
+      commonEntry = document.getElementById("commonEntry"),
+      sc1Input = document.getElementById("sc1Count"),
+      depotToggle = document.getElementById("depotToggle"),
+      anInput = document.getElementById("anInput"),
+      frToggle = document.getElementById("frToggle"),
+      cOrange = document.getElementById("cOrange"),
+      cVert = document.getElementById("cVert"),
+      codifieToggle = document.getElementById("codifieToggle"),
+      resultBody = document.getElementById("resultBody"),
+      resultTable = document.getElementById("resultTable"),
+      resultFoot = document.getElementById("resultFoot"),
+      colHead1 = document.getElementById("colHead1"),
+      colHead2 = document.getElementById("colHead2"),
+      totalDzdCell = document.getElementById("totalDzd"),
+      vatDzdCell = document.getElementById("vatDzd"),
+      ttcBox = document.getElementById("ttcBox"),
+      ttcValue = document.getElementById("ttcValue"),
+      printBtn = document.getElementById("printBtn");
+
+function makeRow(q = "", d2 = "") {
+  const div = document.createElement("div");
+  div.className = "row";
+  const group = "tp-" + Date.now() + "-" + Math.random().toString(36).slice(2, 7);
+  div.innerHTML = `
+    <div class="size-selector">
+      <div class="tpbar">
+        <label class="tpopt"><input type="radio" name="${group}" class="tp20">20P</label>
+        <label class="tpopt"><input type="radio" name="${group}" class="tp40" checked>40P</label>
+        <label class="tpopt"><input type="radio" name="${group}" class="tp45">45P</label>
+      </div>
+      <button class="remove" title="Supprimer">✖</button>
+    </div>
+    <div class="input-fields">
+      <input type="number" class="qnt" min="1" value="${q}" placeholder="QNT">
+      <input type="date" class="exit" value="${d2}">
+      <input type="text" class="nbj" readonly placeholder="NBJ">
+    </div>
+  `;
+  const exit = div.querySelector(".exit"), nbj = div.querySelector(".nbj"), rm = div.querySelector(".remove");
+  const up = () => {
+    const d = diffDaysInclusive(commonEntry.value, exit.value);
+    nbj.value = d > 0 ? d : "";
+  };
+  commonEntry.addEventListener("change", up);
+  exit.addEventListener("change", up);
+  rm.onclick = () => { triggerHaptic(); div.remove(); };
+  rowsDiv.appendChild(div);
+  if (q) up();
+}
+
+function segmentsGZPerContainer(d) {
+  const s = {GZ01:0, GZ02:0, GZ03:0, GZ04:0};
+  if (d <= 0) return s;
+  if (d > 15) { s.GZ04 = d; return s; }
+  if (d > 8) { s.GZ03 = d; return s; }
+
+  s.GZ01 = Math.min(d, 4);
+  s.GZ02 = Math.min(Math.max(d - 4, 0), 4);
+  return s;
+}
+
+const makeSegmentsTP = order => days => {
+  const s = {};
+  if (days <= 0) return s;
+  s[order[0]] = Math.min(3, days);
+  if (days > 3 && days <= 35) {
+    let r = days - 3;
+    s[order[1]] = Math.min(r, 12); r -= s[order[1]];
+    s[order[2]] = Math.min(r, 10); r -= s[order[2]];
+    s[order[3]] = Math.min(r, 10);
+  } else if (days > 35) {
+    s[order[4]] = days - 3;
+  }
+  return s;
+};
+
+const segTP20 = makeSegmentsTP(["TP03", "TP09", "TP10", "TP11", "TP12"]);
+const segTP40 = makeSegmentsTP(["TP04", "TP13", "TP14", "TP15", "TP16"]);
+
+function expandGroupedRows(list) {
+  const rem = list.slice().filter(x => x > 0), rows = [];
+  while (rem.length > 0) {
+    const min = Math.min(...rem), count = rem.length;
+    rows.push({days: min, containers: count});
+    for (let i = 0; i < rem.length; i++) rem[i] -= min;
+    for (let i = rem.length - 1; i >= 0; i--) if (rem[i] === 0) rem.splice(i, 1);
+  }
+  return rows;
+}
+
+function calculate() {
+  triggerHaptic();
+  if (!commonEntry.value) { showAlert("⚠️ Date d'entrée requise"); return; }
+  const rows = [...document.querySelectorAll(".row")];
+  if (!rows.length) { showAlert("⚠️ Ajoutez une ligne de conteneur"); return; }
+
+  const isCodifie = codifieToggle.checked;
+
+  if (isCodifie) {
+    colHead1.textContent = "Jours";
+    colHead2.textContent = "Conteneurs";
+  } else {
+    colHead1.textContent = "Conteneurs";
+    colHead2.textContent = "Jours";
+  }
+
+  const lists = {};
+  const add = (c, d, q) => { if (!lists[c]) lists[c] = []; for (let i = 0; i < q; i++) lists[c].push(d); };
+
+  let t20 = 0, t40 = 0, t45 = 0;
+  let subTotalHT = 0;
+  let totalVAT = 0;
+  
+  const isVert = cVert.checked;
+  const isOrange = cOrange.checked;
+  const isFR = frToggle.checked;
+  const isDepot = depotToggle.checked; // If DEPOT is enabled, SC03, SC04, SC05 will be omitted
+
+  for (const row of rows) {
+    const q = parseInt(row.querySelector(".qnt").value) || 0,
+          ex = row.querySelector(".exit").value,
+          days = diffDaysInclusive(commonEntry.value, ex);
+    if (q <= 0 || days <= 0) continue;
+
+    const type20 = row.querySelector(".tp20").checked, type45 = row.querySelector(".tp45").checked;
+    if (type20) t20 += q; else if (type45) t45 += q; else t40 += q;
+
+    const gz = segmentsGZPerContainer(days);
+    for (const k in gz) add(k, gz[k], q);
+
+    const tp = (type20 ? segTP20 : segTP40)(days);
+    for (const k in tp) add(k, tp[k], q);
+
+    if (isFR) {
+      if (days > 10) {
+        add("EL05", days, q);
+      } else {
+        const el = {EL02: 3, EL03: 4, EL04: 3};
+        let r = days;
+        for (const k in el) {
+          if (r <= 0) break;
+          let v = Math.min(r, el[k]);
+          add(k, v, q); r -= v;
+        }
+      }
+    }
+    
+    if (days > 8) {
+      const prdDays = days - 8;
+      if (prdDays > 52) {
+        add("PRD4", prdDays, q);
+      } else if (prdDays > 32) {
+        add("PRD3", prdDays, q);
+      } else if (prdDays > 22) {
+        add("PRD2", prdDays, q);
+      } else {
+        add("PRD1", prdDays, q);
+      }
+    }
+  }
+
+  resultBody.innerHTML = "";
+  const entryDateParts = parseDateParts(commonEntry.value);
+  const baseEntryDate = entryDateParts ? new Date(Date.UTC(entryDateParts.y, entryDateParts.m - 1, entryDateParts.d)) : null;
+
+  const out = (c, cnt, d, displayDate = "") => {
+    const tr = document.createElement("tr");
+    const cell1 = isCodifie ? d : cnt;
+    const cell2 = isCodifie ? cnt : d;
+
+    tr.innerHTML = `<td>${c}</td><td>${cell1}</td><td>${cell2}</td><td>${displayDate}</td>`;
+    resultBody.appendChild(tr);
+    const lineAmount = round2(getTariff(c) * d * cnt);
+    subTotalHT = round2(subTotalHT + lineAmount);
+    const lineVat = round2(lineAmount * 0.19);
+    totalVAT = round2(totalVAT + lineVat);
+  };
+
+  const stay20Codes = ["TP03", "TP09", "TP10", "TP11", "TP12"];
+  const stay40Codes = ["TP04", "TP13", "TP14", "TP15", "TP16"];
+  const otherStayCodes = ["GZ01", "GZ02", "GZ03", "GZ04", "EL02", "EL03", "EL04", "EL05"];
+
+  const state20 = { first: true, specialDone: false, runningDate: null };
+  const state40 = { first: true, specialDone: false, runningDate: null };
+
+  const processStayGroup = (codes, stateObj) => {
+    codes.forEach(c => {
+      if (lists[c]) {
+        expandGroupedRows(lists[c]).forEach(g => {
+          let dateStr = "";
+          if (baseEntryDate) {
+            if (stateObj.first) {
+              stateObj.runningDate = new Date(baseEntryDate.getTime());
+              stateObj.runningDate.setUTCDate(stateObj.runningDate.getUTCDate() + g.days - 1);
+              dateStr = formatDateFull(stateObj.runningDate);
+              stateObj.first = false;
+            } else if ((c === "TP16" || c === "TP12") && !stateObj.specialDone) {
+              stateObj.runningDate = new Date(baseEntryDate.getTime());
+              stateObj.runningDate.setUTCDate(stateObj.runningDate.getUTCDate() + g.days + 2);
+              dateStr = formatDateFull(stateObj.runningDate);
+              stateObj.specialDone = true;
+            } else {
+              stateObj.runningDate.setUTCDate(stateObj.runningDate.getUTCDate() + g.days);
+              dateStr = formatDateFull(stateObj.runningDate);
+            }
+          }
+          out(c, g.containers, g.days, dateStr);
+        });
+      }
+    });
+  };
+
+  processStayGroup(stay40Codes, state40);
+  processStayGroup(stay20Codes, state20);
+  otherStayCodes.forEach(c => {
+    if (lists[c]) expandGroupedRows(lists[c]).forEach(g => out(c, g.containers, g.days));
+  });
+
+  const totalAll = t20 + t40 + t45;
+  const isEV = isVert || isOrange || isFR;
+
+  if (t20 > 0) {
+    if (isEV) {
+      out("EV01", t20, 1);
+    } else {
+      out("MA01", t20, 1);
+      if (!isDepot) {
+        out("SC03", t20, 1);
+      }
+    }
+  }
+  if (t40 > 0) {
+    if (isEV) {
+      out("EV02", t40, 1);
+    } else {
+      out("MA02", t40, 1);
+      if (!isDepot) {
+        out("SC04", t40, 1);
+      }
+    }
+  }
+  if (t45 > 0) {
+    if (isEV) {
+      out("EV03", t45, 1);
+    } else {
+      out("MA03", t45, 1);
+      if (!isDepot) {
+        out("SC05", t45, 1);
+      }
+    }
+  }
+  if (!isVert && !isOrange) out("NE01", totalAll, 1);
+  out("D088", totalAll, 1);
+
+  const sc1Val = sc1Input.value.trim();
+  let sc1Final = 0;
+  if (!isVert) {
+    sc1Final = (sc1Val === "") ? totalAll : (parseInt(sc1Val) || 0);
+  } else {
+    // When C.VERT is active, default SC1 is 10% of total containers (Math.ceil(totalAll / 10))
+    sc1Final = (sc1Val === "") ? (totalAll > 0 ? Math.ceil(totalAll / 10) : 0) : (parseInt(sc1Val) || 0);
+  }
+  if (sc1Final > 0) out("SC1", sc1Final, 1);
+
+  // AC1 is always displayed whenever totalAll > 0
+  if (totalAll > 0) out("AC1", totalAll, 1);
+
+  const prdOrder = ["PRD1", "PRD2", "PRD3", "PRD4"];
+  prdOrder.forEach(c => {
+    if (lists[c]) expandGroupedRows(lists[c]).forEach(g => out(c, g.containers, g.days));
+  });
+
+  if (parseInt(anInput.value) > 0) out("AN01", parseInt(anInput.value), 1);
+
+  totalDzdCell.textContent = formatDzd(subTotalHT);
+  vatDzdCell.textContent = formatDzd(totalVAT);
+  const finalTTC = round2(subTotalHT + totalVAT);
+  ttcValue.textContent = formatDzd(finalTTC);
+  
+  resultTable.style.display = "table"; 
+  resultFoot.style.display = "table-footer-group";
+  ttcBox.style.display = "flex"; 
+  printBtn.style.display = "block";
+
+  setTimeout(() => {
+    ttcBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 100);
+}
+
+addBtn.onclick = () => { triggerHaptic(); makeRow(); };
+calcBtn.onclick = calculate;
+resetBtn.onclick = () => {
+  triggerHaptic();
+  commonEntry.value = "";
+  sc1Input.value = "";
+  anInput.value = "";
+  depotToggle.checked = false;
+  frToggle.checked = false;
+  cOrange.checked = false;
+  cVert.checked = false;
+  codifieToggle.checked = false;
+  rowsDiv.innerHTML = "";
+  resultBody.innerHTML = "";
+  resultTable.style.display = "none";
+  ttcBox.style.display = "none";
+  printBtn.style.display = "none";
+  makeRow();
+  document.querySelector('.content-scroll').scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+sampleBtn.onclick = () => {
+  triggerHaptic();
+  commonEntry.value = "2025-01-01"; 
+  cOrange.checked = true;
+  rowsDiv.innerHTML = "";
+  makeRow(1, "2025-01-10"); 
+  calculate();
+};
+
+printBtn.onclick = () => { triggerHaptic(); window.print(); };
+
+const settingsModal = document.getElementById("settingsModal"),
+      openSettingsBtn = document.getElementById("openSettingsBtn"),
+      closeSettingsBtn = document.getElementById("closeSettingsBtn"),
+      saveTariffsBtn = document.getElementById("saveTariffsBtn"),
+      resetTariffsBtn = document.getElementById("resetTariffsBtn"),
+      tariffsGrid = document.getElementById("tariffsGrid");
+
+function renderSettingsUI() {
+  tariffsGrid.innerHTML = "";
+  for (const [code, val] of Object.entries(TARIFFS)) {
+    const div = document.createElement("div");
+    div.className = "tariff-item";
+    div.innerHTML = `
+      <label>${code}</label>
+      <input type="number" step="0.01" min="0" data-code="${code}" value="${val}">
+    `;
+    tariffsGrid.appendChild(div);
+  }
+}
+
+openSettingsBtn.onclick = () => {
+  triggerHaptic();
+  renderSettingsUI();
+  settingsModal.style.display = "flex";
+};
+
+closeSettingsBtn.onclick = () => {
+  triggerHaptic();
+  settingsModal.style.display = "none";
+};
+
+settingsModal.onclick = (e) => {
+  if (e.target === settingsModal) settingsModal.style.display = "none";
+};
+
+saveTariffsBtn.onclick = () => {
+  triggerHaptic();
+  const inputs = tariffsGrid.querySelectorAll("input");
+  inputs.forEach(inp => {
+    const code = inp.dataset.code;
+    const val = parseFloat(inp.value) || 0;
+    TARIFFS[code] = val;
+  });
+  localStorage.setItem('port_oran_tariffs', JSON.stringify(TARIFFS));
+  settingsModal.style.display = "none";
+  showAlert("✅ Tarifs sauvegardés avec succès !");
+};
+
+resetTariffsBtn.onclick = () => {
+  triggerHaptic();
+  TARIFFS = {...DEFAULT_TARIFFS};
+  localStorage.removeItem('port_oran_tariffs');
+  renderSettingsUI();
+  showAlert("🔄 Tarifs par défaut réinitialisés !");
+};
+
+// Initial row startup
+makeRow();
+</script>
+</body>
+</html>
